@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  streamlit:
+    build: ./UI
+    environment:
+      API_ENDPOINT: http://flask:5000
+    ports:
+      - "8501:8501"
+    networks:
+      - car_pred_docker_network
+  
+  flask:
+    build: ./FLASK
+    ports:
+      - "5000:5000"
+    networks:
+      - car_pred_docker_network
+
+networks:
+  car_pred_docker_network:
+    driver: bridge
