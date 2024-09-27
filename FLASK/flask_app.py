@@ -5,7 +5,7 @@ import xgboost as xgb
 from flask import Flask, request, jsonify
 import os
 import joblib
-import pickle
+# import pickle
 
 # Load the XGBoost model
 model = xgb.XGBRegressor()

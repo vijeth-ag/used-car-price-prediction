@@ -1,5 +1,9 @@
 import streamlit as st
 import requests
+import os
+
+# read env variable to a local var
+API_ENDPOINT = os.getenv("API_ENDPOINT")
 
 # Set the title
 st.title("Car Details Input Form")
@@ -22,14 +26,6 @@ transmission = st.selectbox(
     options=["Automatic", "Manual"]
 )
 
-# KM driven range input
-# km_driven = st.slider(
-#     "KM Driven",
-#     min_value=0,
-#     max_value=500000,
-#     value=10000,
-#     step=1000
-# )
 
 # KM driven input
 km_driven = st.number_input(
@@ -103,19 +99,6 @@ car_age = st.number_input(
     step=1
 )
 
-
-# # Submit button
-# if st.button("Submit"):
-#     st.write("### Car Details Submitted")
-#     st.write("**Fuel Type**:", fuel_type)
-#     st.write("**Build Type**:", build_type)
-#     st.write("**Transmission**:", transmission)
-#     st.write("**KM Driven**:", km_driven)
-#     st.write("**Maximum Owners**:", max_owner)
-#     st.write("**Number of Seats**:", seats)
-#     st.write("**Engine Displacement (cc)**:", engine_displacement)
-#     st.write("**Mileage (kmpl)**:", mileage)
-
 # Button to trigger the API call
 if st.button("Predict Price"):
     request = {}
@@ -133,7 +116,7 @@ if st.button("Predict Price"):
     request["car_age"] = car_age
     try:
         # Make the POST request to the Flask API endpoint
-        response = requests.post("http://127.0.0.1:5001/predictrf", json=request)
+        response = requests.post(API_ENDPOINT+"/predictrf", json=request)
         
         # Check if the request was successful
         if response.status_code == 200:
@@ -144,11 +127,6 @@ if st.button("Predict Price"):
             st.error(f"Error: {response.status_code} - {response.text}")
     except requests.exceptions.RequestException as e:
         st.error(f"Request failed: {e}")
-
-    # You can add more logic here to process the submitted data or perform further actions.
-    # make http post request with above data to server
-    # server will return the price of the car
-    # display the price of the car
 
 
     

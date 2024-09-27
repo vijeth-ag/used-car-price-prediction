@@ -5,8 +5,8 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy requirements file and install dependencies
-COPY streamlit_requirements.txt ./
-RUN pip install --no-cache-dir -r streamlit_requirements.txt
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the Streamlit app code
 COPY streamlit_app.py ./

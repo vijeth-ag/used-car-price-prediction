@@ -4,7 +4,7 @@ services:
   streamlit:
     build: ./UI
     environment:
-      API_ENDPOINT: http://flask:5000
+      API_ENDPOINT: http://flask:5001
     ports:
       - "8501:8501"
     networks:
@@ -13,7 +13,7 @@ services:
   flask:
     build: ./FLASK
     ports:
-      - "5000:5000"
+      - "5001:5001"
     networks:
       - car_pred_docker_network
 
